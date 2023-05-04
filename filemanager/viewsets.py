@@ -33,7 +33,7 @@ class DataViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         try:
-            for k, v in kwargs.items():
+            for v in kwargs.values():
                 for id in v.split(','):
                     obj = get_object_or_404(Data, pk=int(id))
                     self.perform_destroy(obj)

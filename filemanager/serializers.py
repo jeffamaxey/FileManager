@@ -20,21 +20,14 @@ class DataSerializer(serializers.ModelSerializer):
         fields = ('file_id', 'file', 'since_added', 'size', 'name', 'filetype')
 
     def get_size(self, obj):
-        file_size = ''
-        if obj.file and hasattr(obj.file, 'size'):
-            file_size = obj.file.size
-        return file_size
+        return obj.file.size if obj.file and hasattr(obj.file, 'size') else ''
 
     def get_name(self, obj):
-        file_name = ''
-        if obj.file and hasattr(obj.file, 'name'):
-            file_name = obj.file.name
-        return file_name
+        return obj.file.name if obj.file and hasattr(obj.file, 'name') else ''
 
     def get_filetype(self, obj):
       filename = obj.file.name
       return filename.split('.')[-1]
 
     def get_since_added(self, obj):
-        date_added = obj.date_created
-        return date_added
+        return obj.date_created
